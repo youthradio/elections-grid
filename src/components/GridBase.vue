@@ -1,14 +1,18 @@
 <template>
-  <div class="row">
-    <div class="col-12 col-md-12 mx-auto">
-      <template v-if="!isLoading">
-        {{ startData }}
+<div class="row">
+  <div class="col-12 col-md-12 mx-auto">
+    <template v-if="!isLoading">
+        <div class="row no-gutters">
+           <div class="col-4" v-for="profile in profilesData" v-key="profile">
+             <ProfileGrid :profileData="profile" />
+           </div>
+        </div>
       </template>
-      <template v-else>
+    <template v-else>
         Loading...
       </template>
-      <div class="d-flex align-items-center pl-3 pb-2">
-        <span
+    <div class="d-flex align-items-center pl-3 pb-2">
+      <span
           class="icon-facebook-inverted share-icon m-1 pointer"
           @click="facebookThis"/>
         <span
@@ -20,8 +24,15 @@
 </template>
 
 <script>
+import ProfileBase from './ProfileBase.vue'
+import ProfileGrid from './ProfileGrid.vue'
+
 export default {
-  name: 'MainComponent',
+  name: 'GridBase',
+  components: {
+    ProfileBase,
+    ProfileGrid
+  },
   data() {
     return {
       startData: "HELLO"
@@ -31,15 +42,18 @@ export default {
     isLoading() {
       return this.$store.state.isLoading;
     },
+    profilesData() {
+      return this.$store.state.gridData;
+    }
   },
   methods: {
-    tweetMessage () {
+    tweetMessage() {
       const url = 'https://www.youthradio.org/'
       const tweet = `Tweet Something : ${url}`
       const tweetUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(tweet)}`
       window.open(tweetUrl, 'pop', 'width=600, height=400, scrollbars=no')
     },
-    facebookThis () {
+    facebookThis() {
       const url = 'https://www.youthradio.org/'
       const title = 'Facebook Something'
       const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}&t=${title}`
@@ -52,5 +66,4 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
 @import '~@/styles/variables';
-
 </style>

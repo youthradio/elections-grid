@@ -4,19 +4,19 @@
     class="container-fluid">
     <div class="row">
       <div class="col-12 col-md-6 mx-auto">
-        <MainComponent/>
+        <GridBase/>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import MainComponent from './components/MainComponent.vue'
+import GridBase from './components/GridBase.vue'
 
 export default {
   name: 'App',
   components: {
-    MainComponent
+    GridBase
   },
   data() {
     return {

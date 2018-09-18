@@ -5,7 +5,7 @@ Vue.use(Vuex)
 
 const state = {
   isLoading: false,
-  quizData: null,
+  gridData: null,
 }
 const actions = {
   fetchData ({ commit }) {
@@ -18,52 +18,16 @@ const actions = {
   }
 }
 const mutations = {
-  async CSV_DATA(state){
+  async CSV_DATA(state) {
     state.isLoading = true;
-    const scoreData = await fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vRcB6J-KsftmFuygHudtucGSi5yjsMcjhSbtQGv4RohpoibjAmoipZN_AhQFbvzV_jwP3tZcsUxVYjc/pub?gid=1758770676&single=true&output=csv')
+    const fetchedData =  await fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vQ8jaIrggREOVzl4qLtNIqy-1G6FBzgC5HZmungz19B6kMDTvhm-eD_1ZXK7u87R5f2tX_E0nRyIYPY/pub?gid=2139654937&single=true&output=csv')
       .then(res => res.text())
       .then(res => csvParse(res))
       .then(data => {
         delete data.columns;
-        return data.map(score => ({
-          scoreRange: score.ScoreRange,
-          scoreTitle: score.Title,
-          scoreImage: score.ScoreImage,
-          scoreDescription: score.Description,
-      }))
-    })
-    const questionData =  await fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vRcB6J-KsftmFuygHudtucGSi5yjsMcjhSbtQGv4RohpoibjAmoipZN_AhQFbvzV_jwP3tZcsUxVYjc/pub?gid=0&single=true&output=csv')
-      .then(res => res.text())
-      .then(res => csvParse(res))
-      .then(data => {
-        delete data.columns
-        const questions = data.map(question => {
-          if (question.Question) {
-            const options = Array.from(Array(parseInt(question.Options_Quantity)), (v, i) => ({
-                "id": `optionID-${i+1}`,
-                "optionText": question[`optionText-${i+1}`],
-                "resultText": question[`resultText-${i+1}`],
-                "correctOption": question[`isOptionCorrect-${i+1}`] === 'TRUE',
-            }));
-            return ({
-                "id": "",
-                "questionOrder": 1,
-                "questionText": question.Question,
-                "featureImage": question.Question_Feature_Image,
-                "options" : options,
-            })
-          }
-        })
-        return { "quiz": {
-            "id": "5b930f393f9082129af6bc74",
-            "description": "",
-            "featureImage": "",
-            "questions": questions,
-            "scorePage": scoreData,
-        }
-       }
-     })
-    state.quizData = questionData.quiz;
+        return data;
+      })
+    state.gridData = fetchedData;
     state.isLoading = false;
   },
   async FAKE_DATA(state){
