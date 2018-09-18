@@ -1,16 +1,26 @@
 <template>
-<div :style="profileImage" class="square one m-2">
-  <div ></div>
-  <div class="info dem m-2">
-    <h4>
-      <strong>Hadiya Afzal </strong> <span class="x"> x </span>
-      </h4>
-    <p>
-      18, Illinois <br>
-      <em class="d-none d-sm-inline">“I think that means we tackle mental-health issues, I think it means we tackle school safety issues, and I think it means we tackle gun issues.”</em>
-    </p>
+  <div>
+    <div
+      :style="profileImage"
+      class="square">
+      <div :class="[partyColor,'info p-2']">
+        <div class="head">
+          <h4>
+            <strong>{{ profileData.Name }} </strong> <span class="x"> x </span>
+          </h4>
+        </div>
+        <div>
+          <p>
+            {{ profileData.Age }}, {{ profileData.Location }}
+            <em class="d-none d-sm-inline">
+              {{ profileData.Quote }}
+            </em>
+          </p>
+        </div>
+      </div>
+    </div>
+
   </div>
-</div>
 </template>
 
 <script>
@@ -19,7 +29,8 @@ export default {
   props: {
     profileData: {
       type: Object,
-      require: true
+      require: true,
+      default: null,
     }
   },
   data() {
@@ -32,6 +43,9 @@ export default {
       return {
         "background-image": `url(${this.profileData.Profile_Image})`
       };
+    },
+    partyColor() {
+        return this.profileData.Party_Affiliation.trim().toLowerCase().split(' ').join('-');
     }
   }
 }
@@ -40,32 +54,43 @@ export default {
 <style lang="scss" scoped>
 @import '~@/styles/variables';
 
-.one {
+.square {
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-}
-.square {
     padding-bottom: 100%;
+    position: relative;
+    margin: 1%;
 }
+
 .info {
-    display:none;
+    display: none;
     position: absolute;
-    font-size: 20px;
+    top: 0px;
+    font-size: 1rem;
     color: $white;
     width: 100%;
     height: 100%;
 }
-.dem {
-    background-color: #1A2442;
+.square:hover{
+
+  .info{
+    display: block;
+  }
 
 }
-.rep {
-    background-color: red;
+
+.democrat {
+    background-color: $blue-dem;
+}
+.republican {
+    background-color: $red;
+}
+.independent {
+  background-color: darken(yellow, 10%);
+}
+.green-party {
+  background-color: darken(green, 10%);;
 }
 
-.square:hover > .info{
-  display: block;
-
-}
 </style>

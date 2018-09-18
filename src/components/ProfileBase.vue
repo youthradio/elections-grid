@@ -1,7 +1,7 @@
 <template>
-<div class="">
-  Profile Description
-</div>
+  <div class="">
+    Profile Description
+  </div>
 </template>
 
 <script>

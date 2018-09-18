@@ -4,17 +4,15 @@
 @import "icons";
 @import "animations";
 
+/* Document level adjustments */
+html {
+  font-size: 17px;
+}
 //boostrap variables override
-$body-bg: $white;
-$body-color: $black;
-$gray-900: $black;
-
-$font-family-sans-serif:  'Assistant', sans-serif;
-
 body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font: 18px/1.7 'Assistant', sans-serif;
+  font-family: 'Assistant', sans-serif;
   letter-spacing: 0.5px;
   color: $black;
 }
@@ -50,16 +48,17 @@ body, html {
   background-color: $black;
   color: $white;
 }
-/* Document level adjustments */
-html {
-  font-size: 17px;
-}
-@media (max-width: 992px) {
-  html { font-size: 15px; }
-}
-@media (max-width: 576px) {
-  html { font-size: 13px; }
-}
-
 
 @import "../../node_modules/bootstrap/scss/bootstrap";
+@include media-breakpoint-up(xs) {
+  html { font-size: 12px;}
+}
+@include media-breakpoint-up(sm) {
+  html { font-size: 14px; }
+}
+@include media-breakpoint-up(md) {
+  html { font-size: 15px; }
+}
+@include media-breakpoint-up(lg) {
+  html { font-size: 17px; }
+}

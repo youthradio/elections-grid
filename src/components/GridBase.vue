@@ -1,18 +1,21 @@
 <template>
-<div class="row">
-  <div class="col-12 col-md-12 mx-auto">
-    <template v-if="!isLoading">
+  <div class="row">
+    <div class="col-12 col-md-12 mx-auto">
+      <template v-if="!isLoading">
         <div class="row no-gutters">
-           <div class="col-4" v-for="profile in profilesData" v-key="profile">
-             <ProfileGrid :profileData="profile" />
-           </div>
+          <div 
+            v-for="(profile, index) in profilesData" 
+            :key="`profile-${index}`" 
+            class="col-4">
+            <ProfileGrid :profile-data="profile" />
+          </div>
         </div>
       </template>
-    <template v-else>
+      <template v-else>
         Loading...
       </template>
-    <div class="d-flex align-items-center pl-3 pb-2">
-      <span
+      <div class="d-flex align-items-center pl-3 pb-2">
+        <span
           class="icon-facebook-inverted share-icon m-1 pointer"
           @click="facebookThis"/>
         <span
