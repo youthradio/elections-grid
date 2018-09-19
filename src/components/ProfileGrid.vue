@@ -31,6 +31,7 @@ export default {
     profileData: {
       type: Object,
       require: true,
+      default: null,
     }
   },
   data() {

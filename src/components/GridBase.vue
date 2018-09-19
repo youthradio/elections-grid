@@ -1,33 +1,45 @@
 <template>
   <div class="row">
-    <div role="grid-base" class="col-12 col-md-12 mx-auto">
-      <transition name="slide">
+    <div
+      role="grid-base"
+      class="col-12 col-md-12 mx-auto">
+      <transition-group name="slide">
         <template v-if="!bshowProfile">
-            <div class="row no-gutters">
-                <div
-                  v-for="(profile, index) in profilesData"
-                  :key="`profile-${index}`"
-                  class="col-4">
-                  <ProfileGrid :profileData="profile" v-on:showProfile="showProfile" />
-                </div>
+          <div
+            key="1"
+            class="row no-gutters">
+            <div
+              v-for="(profile, index) in profilesData"
+              :key="`profile-${index}`"
+              class="col-4">
+              <ProfileGrid
+                :profile-data="profile"
+                @showProfile="showProfile" />
             </div>
-          </template>
-       </transition>
-       <!-- <div class="d-flex align-items-center pl-3 pb-2">
-         <span
-           class="icon-facebook-inverted share-icon m-1 pointer"
-           @click="facebookThis"/>
-         <span
-           class="icon-twitter-inverted share-icon m-1 pointer"
-           @click="tweetMessage"/>
-       </div> -->
-       <transition name="slide-right">
-         <template v-if="bshowProfile">
-           <div class="profile no-gutters">
-             <div class="col">
-               <ProfileBase v-on:goBack="goBack" :profileData="profileFeatured"/>
-             </div>
-           </div>
+          </div>
+          <div
+            key="2"
+            role="social-share"
+            class="d-flex">
+            <span
+              class="icon-facebook-inverted share-icon m-1 pointer"
+              @click="facebookThis"/>
+            <span
+              class="icon-twitter-inverted share-icon m-1 pointer"
+              @click="tweetMessage"/>
+          </div>
+        </template>
+      </transition-group>
+      <transition name="slide-right">
+        <template v-if="bshowProfile">
+          <div class="profile no-gutters">
+            <div class="col">
+              <ProfileBase
+                v-if="profileFeatured"
+                :profile-data="profileFeatured"
+                @goBack="goBack"/>
+            </div>
+          </div>
         </template>
       </transition>
     </div>
@@ -89,7 +101,7 @@ export default {
 
 .slide-enter-active,
 .slide-leave-active {
-  transition: transform .5s;
+  transition: transform .6s;
 
 }
 .slide-enter,
@@ -99,7 +111,7 @@ export default {
 
 .slide-right-enter-active,
 .slide-right-leave-active {
-  transition: transform .5s;
+  transition: transform .6s;
   transform: translateX(0px);
   position: absolute;
   top: 0;
