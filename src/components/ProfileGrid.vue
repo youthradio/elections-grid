@@ -1,8 +1,9 @@
 <template>
-  <div>
+  <div role="profile-grid">
     <div
       :style="profileImage"
-      class="square">
+      class="square"
+      @click.stop="profileClicked">
       <div :class="[partyColor,'info p-2']">
         <div class="head">
           <h4>
@@ -30,7 +31,6 @@ export default {
     profileData: {
       type: Object,
       require: true,
-      default: null,
     }
   },
   data() {
@@ -46,6 +46,11 @@ export default {
     },
     partyColor() {
         return this.profileData.Party_Affiliation.trim().toLowerCase().split(' ').join('-');
+    }
+  },
+  methods: {
+    profileClicked() {
+      this.$emit('showProfile', this.profileData)
     }
   }
 }
