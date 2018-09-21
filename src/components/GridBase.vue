@@ -3,45 +3,41 @@
     <div
       role="grid-base"
       class="col-12 col-md-12 mx-auto">
-      <transition-group name="slide">
-        <template v-if="!bshowProfile">
+      <template v-if="!bshowProfile">
+        <div
+          key="1"
+          class="row no-gutters">
           <div
-            key="1"
-            class="row no-gutters">
-            <div
-              v-for="(profile, index) in profilesData"
-              :key="`profile-${index}`"
-              class="col-4">
-              <ProfileGrid
-                :profile-data="profile"
-                @showProfile="showProfile" />
-            </div>
+            v-for="(profile, index) in profilesData"
+            :key="`profile-${index}`"
+            class="col-4">
+            <ProfileGrid
+              :profile-data="profile"
+              @showProfile="showProfile" />
           </div>
-          <div
-            key="2"
-            role="social-share"
-            class="d-flex">
-            <span
-              class="icon-facebook-inverted share-icon m-1 pointer"
-              @click="facebookThis"/>
-            <span
-              class="icon-twitter-inverted share-icon m-1 pointer"
-              @click="tweetMessage"/>
+        </div>
+        <div
+          key="2"
+          role="social-share"
+          class="d-flex">
+          <span
+            class="icon-facebook-inverted share-icon m-1 pointer"
+            @click="facebookThis"/>
+          <span
+            class="icon-twitter-inverted share-icon m-1 pointer"
+            @click="tweetMessage"/>
+        </div>
+      </template>
+      <template v-else>
+        <div class="profile no-gutters">
+          <div class="col">
+            <ProfileBase
+              v-if="profileFeatured"
+              :profile-data="profileFeatured"
+              @goBack="goBack"/>
           </div>
-        </template>
-      </transition-group>
-      <transition name="slide-right">
-        <template v-if="bshowProfile">
-          <div class="profile no-gutters">
-            <div class="col">
-              <ProfileBase
-                v-if="profileFeatured"
-                :profile-data="profileFeatured"
-                @goBack="goBack"/>
-            </div>
-          </div>
-        </template>
-      </transition>
+        </div>
+      </template>
     </div>
   </div>
 </template>
