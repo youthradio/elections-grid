@@ -3,23 +3,27 @@
     <div class="row">
       <div class="col-12">
         <div class="card">
-          <span @click="$emit('goBack')">X</span>
-          <img
-            :src="profileData.Profile_Image"
-            class="card-img-top"
-            alt="Card image cap">
-          <div class="card-body">
-            <!-- youtube iframe with progressive enhancement (extra queries after the url to optimize the embed) -->
+          <div class="icon-close icon float" @click="$emit('goBack')"></div>
+          <template v-if="videoProfile">
             <VuePlyr :options="playerOptions">
               <div class="plyr__video-embed player-custom-style">
                 <iframe
-                  src="https://www.youtube.com/embed/bTqVqk7FSmY?iv_load_policy=3&amp;modestbranding=1&amp;playsinline=1&amp;showinfo=0&amp;rel=0&amp;enablejsapi=1"
+                  :src="videoProfile"
                   allowfullscreen
                   allowtransparency
                   allow="autoplay"/>
               </div>
             </VuePlyr>
-            <VuePlyr :options="playerOptions">
+          </template>
+          <template v-else>
+            <img
+              @click="$emit('goBack')"
+              :src="profileData.Profile_Image"
+              class="card-img-top"
+              alt="Card image cap">
+          </template>
+          <div class="card-body">
+            <VuePlyr v-if="audioProfile" :options="playerOptions">
               <audio>
                 <source
                   src="https://s3.amazonaws.com/media.youthradio.org/wp-content/uploads/2017/08/23160224/2535642_YR_TitleIX_SexualHarassment.mp3"
@@ -66,6 +70,14 @@ export default {
     }
   },
   computed: {
+    videoProfile(){
+      const vp = this.profileData.Video_Profile;
+      return vp === "" ? false : vp;
+    },
+    audioProfile(){
+      const ap = this.profileData.Audio_Profile;
+      return ap === "" ? false : ap;
+    },
     playerOptions() {
       return {
         hideYouTubeDOMError: true,
@@ -94,5 +106,11 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
-
+.float{
+  position: absolute;
+  right: 0px;
+  margin: 1%;
+  padding: 2%;
+  z-index: 10;
+}
 </style>
