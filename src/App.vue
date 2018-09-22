@@ -33,5 +33,5 @@ export default {
 
 <style lang="scss">
 @import "./styles/custom";
-
+@import "./styles/player";
 </style>

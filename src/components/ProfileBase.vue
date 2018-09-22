@@ -1,15 +1,34 @@
 <template>
-  <div 
-    role="profile-base" 
-    @click="$emit('goBack')">
+  <div role="profile-base">
     <div class="row">
       <div class="col-12">
         <div class="card">
-          <img 
-            :src="profileData.Profile_Image" 
-            class="card-img-top" 
+          <span @click="$emit('goBack')">X</span>
+          <img
+            :src="profileData.Profile_Image"
+            class="card-img-top"
             alt="Card image cap">
           <div class="card-body">
+            <!-- youtube iframe with progressive enhancement (extra queries after the url to optimize the embed) -->
+            <VuePlyr :options="playerOptions">
+              <div class="plyr__video-embed player-custom-style">
+                <iframe
+                  src="https://www.youtube.com/embed/bTqVqk7FSmY?iv_load_policy=3&amp;modestbranding=1&amp;playsinline=1&amp;showinfo=0&amp;rel=0&amp;enablejsapi=1"
+                  allowfullscreen
+                  allowtransparency
+                  allow="autoplay"/>
+              </div>
+            </VuePlyr>
+            <VuePlyr :options="playerOptions">
+              <audio>
+                <source
+                  src="https://s3.amazonaws.com/media.youthradio.org/wp-content/uploads/2017/08/23160224/2535642_YR_TitleIX_SexualHarassment.mp3"
+                  type="audio/mp3">
+                <source
+                  src="audio.ogg"
+                  type="audio/ogg">
+              </audio>
+            </VuePlyr>
             <h2 class="card-title">{{ profileData.Name }}, {{ profileData.Age }} </h2>
             <div class="card-text">
               <h3 class="candidate">
@@ -27,8 +46,13 @@
 </template>
 
 <script>
+import VuePlyr from './VuePlyr.vue'
+
 export default {
   name: 'ProfileBase',
+  components:{
+    VuePlyr
+  },
   props: {
     profileData: {
       type: Object,
@@ -41,10 +65,34 @@ export default {
       startData: "HELLO"
     }
   },
+  computed: {
+    playerOptions() {
+      return {
+        hideYouTubeDOMError: true,
+        iconUrl: process.env.BASE_URL + 'plyr.svg',
+        'volume': 1,
+        controls: [
+          'play-large', // The large play button in the center
+          // 'restart', // Restart playback
+          // 'rewind', // Rewind by the seek time (default 10 seconds)
+          'play', // Play/pause playback
+          // 'fast-forward', // Fast forward by the seek time (default 10 seconds)
+          'progress', // The progress bar and scrubber for playback and buffering
+          'current-time', // The current time of playback
+          // 'duration', // The full duration of the media
+          'mute', // Toggle mute
+          'volume', // Volume control
+          'pip', // Picture-in-picture (currently Safari only)
+          'airplay' // Airplay (currently Safari only)
+          // 'settings' // Settings menu
+        ]
+      }
+    },
+  }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
-@import '~@/styles/variables';
+
 </style>
