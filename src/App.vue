@@ -12,6 +12,7 @@
 
 <script>
 import GridBase from './components/GridBase.vue'
+import ResizeObserver from 'resize-observer-polyfill';
 
 export default {
   name: 'App',
@@ -24,6 +25,18 @@ export default {
   },
   created() {
     this.$store.dispatch('fetchData');
+  },
+  mounted() {
+    const elementRoot = this.$root.$el;
+    const resizeObserver = new ResizeObserver(entries => {
+      for (const entry of entries) {
+        const { height } = entry.contentRect;
+        const elementHeight = 'elementHeight:' + height;
+        console.log(elementHeight);
+        parent.postMessage(elementHeight, '*');
+      }
+    });
+    resizeObserver.observe(elementRoot);
   },
   methods: {
 
