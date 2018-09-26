@@ -32,7 +32,7 @@ export default {
       for (const entry of entries) {
         const { height } = entry.contentRect;
         const elementHeight = 'elementHeight:' + height;
-        console.log(elementHeight);
+        // console.log(elementHeight);
         parent.postMessage(elementHeight, '*');
       }
     });

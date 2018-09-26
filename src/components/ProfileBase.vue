@@ -3,13 +3,14 @@
     <div class="row">
       <div class="col-12">
         <div class="card">
-          <div class="icon-close icon float" @click="$emit('goBack')"></div>
+          <div
+            class="icon-close icon float"
+            @click="$emit('goBack')"/>
           <template v-if="videoProfile">
             <VuePlyr :options="playerOptions">
               <div class="plyr__video-embed player-custom-style">
                 <iframe
                   :src="videoProfile"
-                  allowfullscreen
                   allowtransparency
                   allow="autoplay"/>
               </div>
@@ -17,20 +18,19 @@
           </template>
           <template v-else>
             <img
-              @click="$emit('goBack')"
               :src="profileData.Profile_Image"
               class="card-img-top"
-              alt="Card image cap">
+              alt="Card image cap"
+              @click="$emit('goBack')">
           </template>
           <div class="card-body">
-            <VuePlyr v-if="audioProfile" :options="playerOptions">
+            <VuePlyr
+              v-if="audioProfile"
+              :options="playerOptions">
               <audio>
                 <source
-                  src="https://s3.amazonaws.com/media.youthradio.org/wp-content/uploads/2017/08/23160224/2535642_YR_TitleIX_SexualHarassment.mp3"
+                  :src="audioProfile"
                   type="audio/mp3">
-                <source
-                  src="audio.ogg"
-                  type="audio/ogg">
               </audio>
             </VuePlyr>
             <h2 class="card-title">{{ profileData.Name }}, {{ profileData.Age }} </h2>
@@ -83,6 +83,7 @@ export default {
         hideYouTubeDOMError: true,
         iconUrl: process.env.BASE_URL + 'plyr.svg',
         'volume': 1,
+        'fullscreen': false,
         controls: [
           'play-large', // The large play button in the center
           // 'restart', // Restart playback
