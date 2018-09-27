@@ -34,13 +34,16 @@
               </audio>
             </VuePlyr>
             <h2 class="card-title">{{ profileData.Name }}, {{ profileData.Age }} </h2>
-            <div class="card-text">
+            <div
+              class="card-text pointer"
+              @click="$emit('goBack')">
               <h3 class="candidate">
                 <span> {{ profileData.Location }} </span> - <span> {{ profileData.Party_Affiliation }} </span> - <span> Govenor </span>
               </h3>
               <p>
                 {{ profileData.Quote }}
               </p>
+              <div class="float-left ml-2 icon-arrow-left pulse"/>
             </div>
           </div>
         </div>

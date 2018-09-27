@@ -2,21 +2,20 @@
   <div role="profile-grid">
     <div
       :style="profileImage"
-      class="square"
+      class="square pointer"
       @click.stop="profileClicked">
       <div :class="[partyColor,'info p-2']">
         <div class="head">
           <h4>
-            <strong>{{ profileData.Name }} </strong> <span class="x"> x </span>
+            <strong>{{ profileData.Name }} </strong>
           </h4>
         </div>
         <div>
           <p>
             {{ profileData.Age }}, {{ profileData.Location }}
-            <em class="d-none d-sm-inline">
-              {{ profileData.Quote }}
-            </em>
           </p>
+          <div class="float-right ml-2 icon-arrow-right pulse"/>
+
         </div>
       </div>
     </div>
