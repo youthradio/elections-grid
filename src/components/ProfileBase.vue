@@ -18,7 +18,7 @@
           </template>
           <template v-else>
             <img
-              :src="profileData.Profile_Image"
+              :src="`data/2018-elections/${profileData.Profile_Image}`"
               class="card-img-top"
               alt="Card image cap"
               @click="$emit('goBack')">
@@ -38,7 +38,7 @@
               class="card-text pointer"
               @click="$emit('goBack')">
               <h3 class="candidate">
-                <span> {{ profileData.Location }} </span> - <span> {{ profileData.Party_Affiliation }} </span> - <span> Govenor </span>
+                <span> {{ profileData.Location }} </span> - <span> {{ profileData.Party_Affiliation }} </span>
               </h3>
               <p>
                 {{ profileData.Quote }}

@@ -3,7 +3,7 @@ module.exports = {
     sourceMap: true
   },
 
-  baseUrl: '',
+  baseUrl: '/elections-grid/',
   outputDir: undefined,
   assetsDir: 'src/assets',
   runtimeCompiler: undefined,

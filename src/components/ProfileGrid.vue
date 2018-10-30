@@ -4,7 +4,9 @@
       :style="profileImage"
       class="square pointer"
       @click.stop="profileClicked">
-      <div :class="[partyColor,'info p-2']">
+      <div
+        :style="backgroundColor"
+        class="info p-2']">
         <div class="head">
           <h4>
             <strong>{{ profileData.Name }} </strong>
@@ -41,7 +43,12 @@ export default {
   computed: {
     profileImage() {
       return {
-        "background-image": `url(${this.profileData.Profile_Image})`
+        "background-image": `url(data/2018-elections/${this.profileData.Profile_Image})`
+      };
+    },
+    backgroundColor() {
+      return {
+        "background-color": this.profileData.Background_Color
       };
     },
     partyColor() {
@@ -82,20 +89,6 @@ export default {
   .info{
     display: block;
   }
-
-}
-
-.democrat {
-    background-color: $blue-dem;
-}
-.republican {
-    background-color: $red;
-}
-.independent {
-  background-color: darken(yellow, 10%);
-}
-.green-party {
-  background-color: darken(green, 10%);;
 }
 
 </style>
