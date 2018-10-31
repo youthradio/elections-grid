@@ -16,17 +16,6 @@
               @showProfile="showProfile" />
           </div>
         </div>
-        <div
-          key="2"
-          role="social-share"
-          class="d-flex">
-          <span
-            class="icon-facebook-inverted share-icon m-1 pointer"
-            @click="facebookThis"/>
-          <span
-            class="icon-twitter-inverted share-icon m-1 pointer"
-            @click="tweetMessage"/>
-        </div>
       </template>
       <template v-else>
         <div class="profile no-gutters">

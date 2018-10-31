@@ -6,7 +6,7 @@
       @click.stop="profileClicked">
       <div
         :style="backgroundColor"
-        class="info p-2']">
+        class="info p-2">
         <div class="head">
           <h4>
             <strong>{{ profileData.Name }} </strong>
@@ -17,7 +17,6 @@
             {{ profileData.Age }}, {{ profileData.Location }}
           </p>
           <div class="float-right ml-2 icon-arrow-right pulse"/>
-
         </div>
       </div>
     </div>

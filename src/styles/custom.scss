@@ -37,6 +37,9 @@ body, html {
 .share-icon {
     color: $sky-blue;
     font-size: 2rem;
+    &:hover {
+      text-decoration: none;
+    }
 }
 .icon:hover {
   color: $black;

@@ -37,12 +37,26 @@
             <div
               class="card-text pointer"
               @click="$emit('goBack')">
-              <h3 class="candidate">
+              <h5 class="candidate">
                 <span> {{ profileData.Location }} </span> - <span> {{ profileData.Party_Affiliation }} </span>
-              </h3>
+              </h5>
               <p>
                 {{ profileData.Quote }}
               </p>
+              <div class="d-flex dlex-wrap align-items-center justify-content-end">
+                <a
+                  v-if="profileData.Website"
+                  :href="profileData.Website"
+                  target="_blank"
+                  class="">
+                  Website
+                </a>
+                <a
+                  v-if="profileData.Twitter_handle"
+                  :href="`https://twitter.com/${profileData.Twitter_handle}`"
+                  target="_blank"
+                  class="icon-twitter-inverted share-icon m-1 pointer"/>
+              </div>
               <div class="float-left ml-2 icon-arrow-left pulse"/>
             </div>
           </div>
@@ -116,5 +130,11 @@ export default {
   margin: 1%;
   padding: 2%;
   z-index: 10;
+}
+p {
+  font-size: 1.2rem;
+}
+h5 {
+  font-weight: 600;
 }
 </style>
