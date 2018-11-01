@@ -27,7 +27,7 @@ const mutations = {
         delete data.columns;
         return data;
       })
-    state.gridData = fetchedData;
+    state.gridData = fetchedData.sort(() => 0.5 - Math.random());
     state.isLoading = false;
   },
   async FAKE_DATA(state){
