@@ -20,7 +20,7 @@ const actions = {
 const mutations = {
   async CSV_DATA(state) {
     state.isLoading = true;
-    const fetchedData =  await fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vQ8jaIrggREOVzl4qLtNIqy-1G6FBzgC5HZmungz19B6kMDTvhm-eD_1ZXK7u87R5f2tX_E0nRyIYPY/pub?gid=2139654937&single=true&output=csv')
+    const fetchedData =  await fetch(`${process.env.BASE_URL}data/2018-elections/data.csv`)
       .then(res => res.text())
       .then(res => csvParse(res))
       .then(data => {
